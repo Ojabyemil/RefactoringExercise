@@ -7,6 +7,7 @@ namespace RefactoringExercise
     {
         static void Main(string[] args)
         {
+
             //REFAKTORISERA KODEN
             //Fixa koden så den blir bättre att läsa och underhålla.
             //Lägg fokus på:
