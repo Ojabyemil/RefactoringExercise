@@ -1,107 +1,72 @@
-﻿using System.Timers;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace RefactoringExercise
+﻿namespace RefactoringExercise
 {
     internal class Program
     {
-        static void Main(string[] args)
-        {
-
-            //REFAKTORISERA KODEN
-            //Fixa koden så den blir bättre att läsa och underhålla.
-            //Lägg fokus på:
-            //1- Undvik Repeterad kod. Ersätt den för metoder
-            //2- Lägg kommentarer. Du kan väl gyssa vad koden gör och lägga den som kommentärer
-            //3- Validera input. dvs, parsa och kolla att det är i rätt typ
-            //4- Hantera errors. Informera om fel och/eller skapa kod som inte crashar.
-            //5- Ge feedback till användaren. Om den skriver fel ska den få veta varför.
-            
+        static void Main()
+        {   
             int answer = -1;
-
             while (answer != 0)
             {
                 Console.Clear();
                 Console.WriteLine("What do you want to do?\n 1. A line\n 2. My Line\n 3. A Square\n 4. My Square\n 5. A border\n 6. My border\n 0. Exit");
-                answer = int.Parse(Console.ReadLine());
-
-                //Example Comment
-                if (answer == 1)
+                int.TryParse(Console.ReadLine(), out answer); //Parses the given string into an int, if it can't then returns 0
+                switch (answer)
                 {
-                        Console.WriteLine("");
-                        for (int i = 0; i < 6; i++)
+                    case 1:
+                        Console.Write("\n #  #  #  #  #  # "); //Writes the following line
+                        break;
+                    case 2:
+                        Console.Write("How many hashtags (max 10)? ");
+                        int.TryParse(Console.ReadLine(), out int times);
+                        Console.WriteLine();
+                        for (int i = 0; i < times && i < 10; i++)  //Writes each part of the line until the given length or at max 10
                         {
                             Console.Write(" # ");
                         }
-                }else if(answer == 2)
-                {
-                    Console.Write("How many hashtags (max 10)? ");
-                    int times = int.Parse(Console.ReadLine());
-                    Console.WriteLine("");
-                    for (int i = 0; i < times; i++)
-                    {
-                        Console.Write(" # ");
-                    }
-                }
-                else if(answer == 3)
-                {
-                    Console.WriteLine("");
-                    for (int i = 0; i < 5; i++)
-                    {
-                        for (int j = 0; j < 5; j++)
+                        break;
+                    case 3:
+                        Console.Write("\n##########\n##########\n##########\n##########\n##########"); //Writes a 5x5 square
+                        break;
+                    case 4:
+                        Console.Write("How many hashtags (max 10)? ");
+                        int.TryParse(Console.ReadLine(), out times);
+                        Console.WriteLine();
+                        for (int i = 0; i < times && i < 10; i++)  //Writes out the square to the given length, or at max 10
                         {
-                            Console.Write("##");
+                            for (int j = 0; j < times && j < 10; j++)
+                            {
+                                Console.Write("##");
+                            }
+                            Console.WriteLine();
+                        }
+                        break;
+                    case 5:
+                        Console.Write("\n #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # ");  //Writes the border
+                        Console.WriteLine("\n# Static Border #");
+                        Console.Write("\n #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  # ");
+                        break;
+                    case 6:
+                        Console.WriteLine("Write a text of max 20 characters long:");
+                        string innerText = Console.ReadLine();
+                        if (innerText.Length > 20)  //Makes sure that the given string isn't too long
+                        {
+                            Console.Write("\nToo long");
+                            break;
                         }
                         Console.WriteLine();
-                    }
-                }
-                else if(answer == 4)
-                {
-                    Console.Write("How many hashtags (max 10)? ");
-                    int times = int.Parse(Console.ReadLine());
-                    Console.WriteLine("");
-                    for (int i = 0; i < times; i++)
-                    {
-                        for (int j = 0; j < times; j++)
+                        for (int i = 0; i < innerText.Length + 4; i++)  //Writes the border to fit the given string
                         {
-                            Console.Write("##");
+                            Console.Write("#");
                         }
-                        Console.WriteLine();
-                    }
+                        Console.WriteLine("\n# " + innerText + " #");
+                        for (int i = 0; i < innerText.Length + 4; i++)
+                        {
+                            Console.Write("#");
+                        }
+                        break;
                 }
-                else if (answer == 5)
-                {
-                    Console.WriteLine("");
-                    for (int i = 0; i < 17; i++)
-                    {
-                        Console.Write(" # ");
-                    }
-                    Console.WriteLine("\n# Static Border #");
-                    for (int i = 0; i < 17; i++)
-                    {
-                        Console.Write(" # ");
-                    }
-                }
-                else if(answer == 6)
-                {
-                    Console.WriteLine("Write a text of max 20 characters long:");
-                    string innerText= Console.ReadLine();
-                    Console.WriteLine("");
-                    for (int i = 0; i < innerText.Length+4; i++)
-                    {
-                        Console.Write("#");
-                    }
-                    Console.WriteLine("\n# "+innerText+" #");
-                    for (int i = 0; i < innerText.Length+4; i++)
-                    {
-                        Console.Write("#");
-                    }
-
-                }
-
                 Console.WriteLine("\n \n Press any key to continue...");
                 Console.ReadKey();
-                
             }
         }
     }
